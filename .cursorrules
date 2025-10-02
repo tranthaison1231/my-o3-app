@@ -1,0 +1,11 @@
+1. **Verify Information**: Always verify information before presenting it. Do not make assumptions or speculate without clear evidence.
+
+2. **File-by-File Changes**: Make changes file by file and give me a chance to spot mistakes.
+
+3. **No Apologies**: Never use apologies.
+
+4. **No Understanding Feedback**: Avoid giving feedback about understanding in comments or documentation.
+
+5. **No Whitespace Suggestions**: Don't suggest whitespace changes.
+
+6. **No Summaries**: Don't summarize changes made.

@@ -30,4 +30,11 @@ if [ -f "package.json" ] && grep -q '"test"' package.json; then
     fi
 fi
 
+# Check for type errors
+echo "🔍 Checking for type errors..."
+if ! bun run check-types; then
+    echo "❌ Type errors found! Please fix them before committing."
+    exit 1
+fi
+
 echo "✅ Pre-commit checks passed!"

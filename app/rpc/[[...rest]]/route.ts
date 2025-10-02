@@ -1,5 +1,5 @@
-import { router } from "@/router";
 import { RPCHandler } from "@orpc/server/fetch";
+import { router } from "@/router";
 
 const handler = new RPCHandler(router);
 

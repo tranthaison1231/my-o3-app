@@ -1,8 +1,8 @@
-import type { router } from "@/router";
-import type { RouterClient } from "@orpc/server";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { BatchLinkPlugin } from "@orpc/client/plugins";
+import type { RouterClient } from "@orpc/server";
+import type { router } from "@/router";
 
 /**
  * This is part of the Optimize SSR setup.

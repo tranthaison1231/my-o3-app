@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run linting
+echo "📝 Checking code style with Biome..."
+if ! bun run lint; then
+    echo "❌ Linting failed! Please fix the issues above."
+    exit 1
+fi
+
+# Check for debugging code in staged files (exclude .husky directory and config files)
+echo "🔍 Checking for debugging code..."
+STAGED_FILES=$(git diff --cached --name-only | grep -v "^\.husky/" | grep -v "\.config\." | grep -v "TEMPLATE")
+if [ -n "$STAGED_FILES" ]; then
+    if echo "$STAGED_FILES" | xargs grep -l "console\.log\|debugger" 2>/dev/null; then
+        echo "❌ Found debugging code in staged files:"
+        echo "$STAGED_FILES" | xargs grep -n "console\.log\|debugger" 2>/dev/null || true
+        echo "Please remove them before committing."
+        exit 1
+    fi
+fi
+
+# Optional: Run tests if they exist
+if [ -f "package.json" ] && grep -q '"test"' package.json; then
+    echo "🧪 Running tests..."
+    if ! bun run test:run 2>/dev/null; then
+        echo "⚠️  Tests not configured or failed. Skipping test check."
+    fi
+fi
+
+echo "✅ Pre-commit checks passed!"

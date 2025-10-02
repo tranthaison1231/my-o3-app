@@ -1,6 +1,6 @@
+import { type } from "arktype";
 import { retry } from "@/middlewares/retry";
 import { pub } from "@/orpc";
-import { type } from "arktype";
 
 export const echoHandler = pub
   .use(retry({ times: 3 }))
@@ -13,14 +13,14 @@ export const echoHandler = pub
   .input(
     type({
       message: "string",
-    })
+    }),
   )
   .output(
     type({
       echoedMessage: "string",
-    })
+    }),
   )
-  .handler(async ({ input, context }) => {
+  .handler(async ({ input }) => {
     return {
       echoedMessage: `Server received: ${input.message}`,
     };

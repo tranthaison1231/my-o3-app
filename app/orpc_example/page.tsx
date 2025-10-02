@@ -36,7 +36,6 @@ export default function ORPCPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             required
-            autoFocus
           />
           <button
             type="submit"
